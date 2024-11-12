@@ -1,0 +1,95 @@
+ public class TemperatureTracker {
+
+    public static void main(String[] args) {
+        
+        int[][] temperatures = {
+            {25, 28, 30, 32, 27},  
+            {26, 29, 31, 33, 28},  
+            {27, 30, 32, 34, 29},  
+            {24, 27, 29, 31, 26},  
+            {28, 31, 33, 35, 30},  
+            {23, 25, 28, 30, 26},  
+            {29, 32, 34, 36, 31}   
+        };
+
+        
+        displayTemperatures(temperatures);
+
+       
+        averageTemperaturePerCity(temperatures);
+
+       
+        hottestDay(temperatures);
+
+        
+        coldestDay(temperatures);
+    }
+
+    
+    public static void displayTemperatures(int[][] temperatures) {
+        System.out.println("Temperatures (Days x Cities):");
+        System.out.println("Day | City 1 | City 2 | City 3 | City 4 | City 5");
+        System.out.println("-----------------------------------------------");
+
+        for (int i = 0; i < temperatures.length; i++) {
+            System.out.print("Day " + (i + 1) + " | ");
+            for (int j = 0; j < temperatures[i].length; j++) {
+                System.out.print(temperatures[i][j] + "   | ");
+            }
+            System.out.println();
+        }
+    }
+
+    
+    public static void averageTemperaturePerCity(int[][] temperatures) {
+        System.out.println("\nAverage Temperature Per City:");
+        for (int city = 0; city < temperatures[0].length; city++) {
+            int sum = 0;
+            for (int day = 0; day < temperatures.length; day++) {
+                sum += temperatures[day][city];
+            }
+            double average = sum / (double) temperatures.length;
+            System.out.println("City " + (city + 1) + " Average Temperature: " + String.format("%.2f", average));
+        }
+    }
+
+    
+    public static void hottestDay(int[][] temperatures) {
+        int hottestTemp = Integer.MIN_VALUE;
+        int hottestDay = -1;
+        int hottestCity = -1;
+
+        for (int i = 0; i < temperatures.length; i++) {
+            for (int j = 0; j < temperatures[i].length; j++) {
+                if (temperatures[i][j] > hottestTemp) {
+                    hottestTemp = temperatures[i][j];
+                    hottestDay = i;
+                    hottestCity = j;
+                }
+            }
+        }
+
+        System.out.println("\nHottest Day:");
+        System.out.println("Day " + (hottestDay + 1) + ", City " + (hottestCity + 1) + " with temperature: " + hottestTemp + "°C");
+    }
+
+   
+    public static void coldestDay(int[][] temperatures) {
+        int coldestTemp = Integer.MAX_VALUE;
+        int coldestDay = -1;
+        int coldestCity = -1;
+
+        for (int i = 0; i < temperatures.length; i++) {
+            for (int j = 0; j < temperatures[i].length; j++) {
+                if (temperatures[i][j] < coldestTemp) {
+                    coldestTemp = temperatures[i][j];
+                    coldestDay = i;
+                    coldestCity = j;
+                }
+            }
+        }
+
+        System.out.println("\nColdest Day:");
+        System.out.println("Day " + (coldestDay + 1) + ", City " + (coldestCity + 1) + " with temperature: " + coldestTemp + "°C");
+    }
+}
